@@ -1,0 +1,202 @@
+import { useState } from "react";
+import Icon from "@/components/ui/icon";
+import { instructors, faqs, LOGO_URL, PHONE, PHONE_DISPLAY, LeadForm } from "./shared";
+
+export default function InstructorsToFooter() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  return (
+    <>
+      {/* ============ INSTRUCTORS ============ */}
+      <section id="instructors" className="py-20 section-alt">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">Команда</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy mb-3">Наши инструкторы</h2>
+            <p className="text-gray-500">Ваши проводники в мир безопасного вождения</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {instructors.map((inst) => (
+              <div key={inst.name} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-center">
+                <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center text-2xl mb-4 font-black ${
+                  inst.lady ? "bg-pink-100 text-pink-600" : "bg-navy/10 text-navy"
+                }`}>
+                  {inst.lady ? "👩" : "👨"}
+                </div>
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <h3 className="font-bold text-navy text-sm">{inst.name}</h3>
+                  {inst.top && <span className="badge-hit text-[10px]">ТОП</span>}
+                  {inst.lady && <span className="text-xs bg-pink-100 text-pink-600 px-2 py-0.5 rounded-full font-bold">🌸</span>}
+                </div>
+                <p className="text-yellow-500 font-bold text-sm mb-1">Стаж: {inst.exp}</p>
+                <p className="text-gray-500 text-xs">{inst.spec}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ REVIEWS ============ */}
+      <section id="reviews" className="py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">Отзывы</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy">Довольные выпускники о нас</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: "Светлана К.", tariff: "Тариф: Приоритет", text: "Отличная автошкола! Инструктор Андрей Викторович — настоящий профессионал. Сдала с первого раза. Особенно понравилась прозрачность в оплате — всё как в договоре.", stars: 5 },
+              { name: "Дмитрий В.", tariff: "Тариф: ВИП", text: "Брал ВИП-тариф — не пожалел. Индивидуальный подход, удобное расписание. Страх вождения пропал уже после 5-го занятия. Теперь езжу каждый день!", stars: 5 },
+              { name: "Марина Л.", tariff: "Тариф: Леди Драйв", text: "Леди Драйв — это просто огонь! Инструктор Ирина — терпеливая и профессиональная. Сначала боялась сесть за руль, а теперь обожаю водить!", stars: 5 },
+            ].map((r) => (
+              <div key={r.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                <div className="flex gap-1 mb-3">
+                  {Array.from({ length: r.stars }).map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-gray-700 text-sm leading-relaxed mb-5">"{r.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    {r.name[0]}
+                  </div>
+                  <div>
+                    <p className="font-bold text-navy text-sm">{r.name}</p>
+                    <p className="text-gray-400 text-xs">{r.tariff}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ BLOG ============ */}
+      <section id="blog" className="py-20 section-alt">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">Полезное</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy">Полезные видеоуроки нашим ученикам</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { title: "Как перестать бояться водить", desc: "Советы от инструктора: первые шаги к уверенности на дороге", icon: "Heart", tag: "Психология" },
+              { title: "Как общаться с инспектором ГИБДД", desc: "Что говорить и как вести себя при остановке — разбор ситуаций", icon: "Shield", tag: "Право" },
+              { title: "Разворот в стеснённых условиях", desc: "Разбираем сложные манёвры шаг за шагом с инструктором", icon: "RotateCcw", tag: "Практика" },
+            ].map((v) => (
+              <div key={v.title} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="h-40 bg-navy flex items-center justify-center relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-navy to-navy/70" />
+                  <div className="relative text-center">
+                    <div className="w-14 h-14 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Icon name={v.icon} size={24} className="text-navy" fallback="Play" />
+                    </div>
+                    <span className="text-white/80 text-xs bg-white/10 rounded-full px-3 py-1">{v.tag}</span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-bold text-navy mb-2">{v.title}</h3>
+                  <p className="text-gray-500 text-sm">{v.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section id="faq" className="py-20">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">FAQ</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy">Часто задаваемые вопросы</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border border-gray-200 rounded-xl overflow-hidden">
+                <button
+                  className="w-full flex items-center justify-between px-6 py-4 text-left font-semibold text-navy hover:bg-gray-50 transition-colors"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                >
+                  <span>{faq.q}</span>
+                  <Icon
+                    name={openFaq === i ? "ChevronUp" : "ChevronDown"}
+                    size={18}
+                    className="text-yellow-500 flex-shrink-0 ml-3"
+                  />
+                </button>
+                {openFaq === i && (
+                  <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
+                    <p className="pt-3">{faq.a}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ LEAD FORM (FOOTER CTA) ============ */}
+      <section id="lead-form" className="py-20 bg-navy">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-yellow-400 text-sm font-bold uppercase tracking-widest mb-3">Начните сегодня</p>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-5">
+                Остались вопросы?<br />
+                <span className="text-yellow-400">Запишитесь</span> на бесплатную консультацию
+              </h2>
+              <div className="space-y-3 text-white/70 text-sm">
+                <div className="flex items-center gap-3">
+                  <Icon name="Phone" size={18} className="text-yellow-400 flex-shrink-0" fallback="Circle" />
+                  <a href={`tel:${PHONE}`} className="text-yellow-400 font-bold text-lg hover:text-yellow-300">{PHONE_DISPLAY}</a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Icon name="MapPin" size={18} className="text-yellow-400 flex-shrink-0" fallback="Circle" />
+                  <span>ул. Киевская, 41, Симферополь</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Icon name="Clock" size={18} className="text-yellow-400 flex-shrink-0" fallback="Circle" />
+                  <span>Пн–Пт: 10:00–18:30</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-7">
+              <LeadForm
+                title="Отправить заявку"
+                subtitle="Перезвоним в течение 15 минут"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FOOTER ============ */}
+      <footer className="bg-navy/95 border-t border-white/10 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+            <img src={LOGO_URL} alt="ГОСАШ" className="h-10 object-contain" />
+            <div className="flex flex-wrap gap-6 text-sm text-white/60">
+              <a href="#tariffs" className="hover:text-yellow-400 transition-colors">Тарифы</a>
+              <a href="#about" className="hover:text-yellow-400 transition-colors">Об автошколе</a>
+              <a href="#instructors" className="hover:text-yellow-400 transition-colors">Инструкторы</a>
+              <a href="#faq" className="hover:text-yellow-400 transition-colors">FAQ</a>
+            </div>
+            <a href={`tel:${PHONE}`} className="text-yellow-400 font-bold hover:text-yellow-300 transition-colors">
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+          <div className="border-t border-white/10 pt-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30">
+            <p>© 2026 Автошкола ГОСАШ · г. Симферополь, ул. Киевская, 41</p>
+            <p>Городская. Открытая. Современная.</p>
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-white/60 transition-colors">Политика конфиденциальности</a>
+              <a href="#" className="hover:text-white/60 transition-colors">Оферта</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
