@@ -257,63 +257,111 @@ export default function TariffsFinanceAbout({ onTariffSelect }: TariffsFinanceAb
       {/* ============ ABOUT ============ */}
       <section id="about" className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">Почему мы</p>
-              <h2 className="text-3xl md:text-4xl font-black text-navy mb-8">Почему выбирают ГОСАШ?</h2>
-              <div className="space-y-6">
-                {[
-                  { icon: "Heart", title: "Вдумчивые инструкторы", desc: "Подбираем подход к каждому ученику. Помогаем преодолеть страх и обрести уверенность на дороге." },
-                  { icon: "Shield", title: "Полная прозрачность", desc: "Никаких скрытых платежей. Цена фиксируется в договоре. ГСМ — отдельно, по факту." },
-                  { icon: "Car", title: "Современный автопарк", desc: "Комфортные KIA RIO с АКПП и МКПП. Учебные авто в отличном техническом состоянии." },
-                ].map((item) => (
-                  <div key={item.title} className="flex items-start gap-5">
-                    <div className="w-12 h-12 bg-yellow-400/15 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Icon name={item.icon} size={22} className="text-yellow-500" fallback="Star" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-navy text-lg mb-1">{item.title}</h3>
-                      <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
+          <div className="mb-14">
+            <p className="text-yellow-500 text-sm font-bold uppercase tracking-widest mb-2">Почему мы</p>
+            <h2 className="text-3xl md:text-4xl font-black text-navy mb-8">Почему выбирают ГОСАШ?</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { icon: "Heart", title: "Вдумчивые инструкторы", desc: "Подбираем подход к каждому ученику. Помогаем преодолеть страх и обрести уверенность на дороге." },
+                { icon: "Shield", title: "Полная прозрачность", desc: "Никаких скрытых платежей. Цена фиксируется в договоре. ГСМ — отдельно, по факту." },
+                { icon: "Car", title: "Современный автопарк", desc: "Комфортные KIA RIO с АКПП и МКПП. Учебные авто в отличном техническом состоянии." },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-5">
+                  <div className="w-12 h-12 bg-yellow-400/15 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Icon name={item.icon} size={22} className="text-yellow-500" fallback="Star" />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h3 className="font-bold text-navy text-lg mb-1">{item.title}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <div className="bg-navy rounded-2xl p-6 text-white">
-                <div className="flex items-start gap-4 mb-4">
-                  <Icon name="MapPin" size={22} className="text-yellow-400 flex-shrink-0 mt-1" fallback="Circle" />
-                  <div>
-                    <p className="font-bold text-lg">ул. Киевская, 41</p>
-                    <p className="text-white/60 text-sm">г. Симферополь</p>
+          {/* Филиалы */}
+          <div className="mb-10">
+            <h3 className="text-2xl md:text-3xl font-black text-navy mb-2 text-center">
+              Автошкола ГОСАШ предлагает на выбор один из 6 классов в разных районах
+            </h3>
+            <p className="text-gray-500 text-center text-sm mb-8">Пн–Пт: 10:00–18:30 · Обед: 13:30–14:00 · <a href={`tel:${PHONE}`} className="text-yellow-500 font-bold hover:text-yellow-600">{PHONE_DISPLAY}</a></p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              {[
+                { name: "Филиал на Киевской", addr: "ул. Киевская, 41", rating: 5.0, map: "https://yandex.ru/maps/146/simferopol/?ll=34.0802%2C44.9523&z=17&pt=34.0802,44.9523,pm2rdm" },
+                { name: "Филиал на Гагарина", addr: "ул. Гагарина, 20А", rating: 5.0, map: "https://yandex.ru/maps/146/simferopol/?ll=34.1093%2C44.9432&z=17&pt=34.1093,44.9432,pm2rdm" },
+                { name: "Филиал на Залесской", addr: "ул. Залесская, 121", rating: 4.8, map: "https://yandex.ru/maps/146/simferopol/?ll=34.0650%2C44.9750&z=17&pt=34.0650,44.9750,pm2rdm" },
+                { name: "Филиал на Самокиша", addr: "ул. Самокиша, 4", rating: 4.9, map: "https://yandex.ru/maps/146/simferopol/?ll=34.0920%2C44.9580&z=17&pt=34.0920,44.9580,pm2rdm" },
+                { name: "Филиал на Лермонтова", addr: "ул. Лермонтова, 13А", rating: 5.0, map: "https://yandex.ru/maps/146/simferopol/?ll=34.1020%2C44.9490&z=17&pt=34.1020,44.9490,pm2rdm" },
+                { name: "Филиал на Севастопольской", addr: "ул. Дм. Ульянова, 1А", rating: 4.9, map: "https://yandex.ru/maps/146/simferopol/?ll=34.0750%2C44.9420&z=17&pt=34.0750,44.9420,pm2rdm" },
+              ].map((branch) => (
+                <div key={branch.name} className="bg-white border border-gray-200 rounded-2xl p-5 hover:border-yellow-400 hover:shadow-md transition-all">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                      <p className="font-bold text-navy text-sm">{branch.name}</p>
+                      <p className="text-gray-500 text-xs mt-0.5">{branch.addr}</p>
+                    </div>
+                    <div className="flex items-center gap-1 flex-shrink-0 bg-yellow-50 border border-yellow-200 rounded-lg px-2 py-1">
+                      <span className="text-red-500 text-xs">📍</span>
+                      <span className="font-black text-sm text-navy">{branch.rating.toFixed(1)}</span>
+                      <div className="flex gap-0.5 ml-1">
+                        {[1,2,3,4,5].map(s => (
+                          <span key={s} className={`text-xs ${s <= Math.floor(branch.rating) ? "text-yellow-400" : "text-gray-300"}`}>★</span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-4 mb-4">
-                  <Icon name="Clock" size={22} className="text-yellow-400 flex-shrink-0 mt-1" fallback="Circle" />
-                  <div>
-                    <p className="font-bold">Пн–Пт: 10:00 – 18:30</p>
-                    <p className="text-white/60 text-sm">Обед: 13:30 – 14:00</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Icon name="Phone" size={22} className="text-yellow-400 flex-shrink-0" fallback="Circle" />
-                  <a href={`tel:${PHONE}`} className="font-bold text-yellow-400 text-lg hover:text-yellow-300 transition-colors">
-                    {PHONE_DISPLAY}
+                  <a
+                    href={branch.map}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 transition-colors"
+                  >
+                    <Icon name="Map" size={12} fallback="Circle" />
+                    Карта проезда
                   </a>
                 </div>
-              </div>
-
-              <div className="rounded-2xl overflow-hidden border border-gray-200 h-56">
-                <iframe
-                  src="https://yandex.ru/map-widget/v1/?ll=34.100000%2C44.950000&z=15&pt=34.100000,44.950000,pm2rdm&text=%D1%83%D0%BB.%20%D0%9A%D0%B8%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%2C%2041%2C%20%D0%A1%D0%B8%D0%BC%D1%84%D0%B5%D1%80%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  title="ГОСАШ на карте"
-                />
-              </div>
+              ))}
             </div>
+
+            {/* Автодром */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 hover:border-yellow-400 hover:shadow-md transition-all max-w-sm">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <p className="font-bold text-navy text-sm">Автодром на Титова</p>
+                  <p className="text-gray-500 text-xs mt-0.5">ул. Титова, 77</p>
+                </div>
+                <div className="flex items-center gap-1 flex-shrink-0 bg-yellow-50 border border-yellow-200 rounded-lg px-2 py-1">
+                  <span className="text-red-500 text-xs">📍</span>
+                  <span className="font-black text-sm text-navy">4.7</span>
+                  <div className="flex gap-0.5 ml-1">
+                    {[1,2,3,4,5].map(s => (
+                      <span key={s} className={`text-xs ${s <= 4 ? "text-yellow-400" : "text-gray-300"}`}>★</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <a
+                href="https://yandex.ru/maps/146/simferopol/?ll=34.0600%2C44.9380&z=17&pt=34.0600,44.9380,pm2rdm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1 transition-colors"
+              >
+                <Icon name="Map" size={12} fallback="Circle" />
+                Карта проезда
+              </a>
+            </div>
+          </div>
+
+          {/* Общая карта */}
+          <div className="rounded-2xl overflow-hidden border border-gray-200 h-80">
+            <iframe
+              src="https://yandex.ru/map-widget/v1/?ll=34.0900%2C44.9500&z=13&pt=34.0802,44.9523,pm2rdm~34.1093,44.9432,pm2rdm~34.0650,44.9750,pm2rdm~34.0920,44.9580,pm2rdm~34.1020,44.9490,pm2rdm~34.0750,44.9420,pm2rdm~34.0600,44.9380,pm2rdm"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              title="Все филиалы ГОСАШ на карте"
+            />
           </div>
         </div>
       </section>
