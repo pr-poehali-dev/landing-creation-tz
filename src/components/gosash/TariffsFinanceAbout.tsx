@@ -42,10 +42,10 @@ export default function TariffsFinanceAbout({ onTariffSelect }: TariffsFinanceAb
                   )}
                 </div>
 
-                <div className="space-y-2 mb-4 flex-1">
+                <div className="space-y-1.5 mb-4 flex-1">
                   <div className="flex items-center gap-2 text-sm">
                     <Icon name="Car" size={15} className="text-yellow-500 flex-shrink-0" fallback="Circle" />
-                    <span className="text-gray-600"><b>{t.hours} часов</b> вождения</span>
+                    <span className="text-gray-700 font-semibold">{t.hoursLabel}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Icon name="BookOpen" size={15} className="text-yellow-500 flex-shrink-0" fallback="Circle" />
@@ -55,37 +55,80 @@ export default function TariffsFinanceAbout({ onTariffSelect }: TariffsFinanceAb
                     <Icon name="User" size={15} className="text-yellow-500 flex-shrink-0" fallback="Circle" />
                     <span className="text-gray-600">{t.instructor}</span>
                   </div>
-                  {t.id === "matcap" && (
-                    <div className="flex items-start gap-2 text-sm bg-green-50 rounded-lg px-3 py-2 mt-2">
-                      <span className="text-green-600 mt-0.5">🎓</span>
-                      <span className="text-green-700 font-medium">3 бесплатных пересдачи в ГИБДД</span>
+                  {t.duration && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Icon name="Clock" size={15} className="text-yellow-500 flex-shrink-0" fallback="Circle" />
+                      <span className="text-gray-600">Срок: {t.duration}</span>
                     </div>
                   )}
-                  {t.id === "lady" && (
-                    <div className="text-xs text-pink-600 font-medium mt-1">
-                      Инструкторы: Ирина Александровна, Наталья Юрьевна
+
+                  {t.features.length > 0 && (
+                    <div className="border-t border-gray-100 pt-3 mt-2 space-y-1">
+                      {t.features.map((f) => (
+                        <div key={f} className="flex items-start gap-2 text-xs">
+                          <Icon name="Check" size={12} className="text-green-500 flex-shrink-0 mt-0.5" fallback="Circle" />
+                          <span className="text-gray-600">{f}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
-                  <div className="border-t border-gray-100 pt-3 mt-3">
-                    <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1.5">Бонусы</p>
-                    {t.bonuses.map((b) => (
-                      <div key={b} className="flex items-start gap-2 text-sm">
-                        <span className="text-yellow-500 font-bold mt-0.5">+</span>
-                        <span className="text-gray-600">{b}</span>
-                      </div>
-                    ))}
-                  </div>
+
+                  {t.restrictions.length > 0 && (
+                    <div className="space-y-1 mt-1">
+                      {t.restrictions.map((r) => (
+                        <div key={r} className="flex items-start gap-2 text-xs">
+                          <Icon name="X" size={12} className="text-red-400 flex-shrink-0 mt-0.5" fallback="Circle" />
+                          <span className="text-gray-400">{r}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {t.extras.length > 0 && (
+                    <div className="bg-gray-50 rounded-lg px-3 py-2 mt-2 space-y-1">
+                      <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Доп. курсы</p>
+                      {t.extras.map((e) => (
+                        <div key={e} className="flex items-start gap-2 text-xs">
+                          <span className="text-gray-400 mt-0.5">•</span>
+                          <span className="text-gray-500">{e}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {t.bonuses.length > 0 && (
+                    <div className="border-t border-gray-100 pt-2 mt-2 space-y-1">
+                      <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide mb-1">Бонусы</p>
+                      {t.bonuses.map((b) => (
+                        <div key={b} className="flex items-start gap-2 text-xs">
+                          <span className="text-yellow-500 font-bold mt-0.5">+</span>
+                          <span className="text-gray-600">{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="border-t border-gray-100 pt-4 mb-4">
-                  <p className={`text-3xl font-black ${t.featured ? "text-yellow-500" : "text-navy"}`}>
+                  <p className={`text-3xl font-black ${t.featured ? "text-yellow-500" : t.color === "pink" ? "text-pink-600" : "text-navy"}`}>
                     {t.price.toLocaleString()} ₽
                   </p>
-                  <p className="text-xs text-gray-400 mt-0.5">без ГСМ</p>
-                  <p className="text-xs text-gray-400">ГСМ (бензин): ~{t.gsm.toLocaleString()} ₽</p>
-                  <p className="text-xs text-gray-500 font-medium mt-1">
-                    Итого с ГСМ: ~{(t.price + t.gsm).toLocaleString()} ₽
-                  </p>
+                  {t.gsm > 0 ? (
+                    <>
+                      <p className="text-xs text-gray-400 mt-0.5">без ГСМ</p>
+                      <p className="text-xs text-gray-400">ГСМ (бензин): ~{t.gsm.toLocaleString()} ₽</p>
+                      <p className="text-xs text-gray-500 font-medium mt-1">
+                        Итого с ГСМ: ~{(t.price + t.gsm).toLocaleString()} ₽
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-xs text-gray-400 mt-0.5">включая все курсы программы</p>
+                  )}
+                  {t.installment && (
+                    <div className="mt-2 bg-yellow-50 border border-yellow-200 rounded-lg px-3 py-1.5">
+                      <p className="text-xs text-yellow-700 font-semibold">Рассрочка: {t.installment}</p>
+                    </div>
+                  )}
                 </div>
 
                 <button
